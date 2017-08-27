@@ -31,9 +31,7 @@ class Datatable extends Component {
 
 
     }
-    componentWillUnmount() {
-    this.serverRequest.abort();
-    }
+
 
     render() {
         var filteredProducts = this.state.products;

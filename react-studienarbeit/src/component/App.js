@@ -25,13 +25,7 @@ class App extends Component {
 
   render() {
     return (
-        <span>
-          <Router>
-
-          <Route exact path="/" component={Datatable}/>
-
-          </Router>
-          </span>
+       <Datatable/>
 
 
 
