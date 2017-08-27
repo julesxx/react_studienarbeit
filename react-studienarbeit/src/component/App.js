@@ -28,7 +28,7 @@ class App extends Component {
         <span>
           <Router>
 
-          <Route exact path="/" component={Login}/>
+          <Route exact path="/" component={Datatable}/>
 
           </Router>
           </span>

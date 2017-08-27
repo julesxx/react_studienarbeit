@@ -1,57 +1,86 @@
 import React, { Component } from 'react';
 
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom'
+
+import {browserHistory} from 'react-router-dom';
+
+import { Redirect } from 'react-router';
 import '../App.css';
 
 
-const fakeAuth = {
-    isAuthenticated: false,
-    authenticate(cb) {
-        this.isAuthenticated = true
-        setTimeout(cb, 100) // fake async
-    },
-    signout(cb) {
-        this.isAuthenticated = false
-        setTimeout(cb, 100)
-    }
+function UserGreeting(props) {
+    return <h1>Welcome back!</h1>;
 }
 
+function GuestGreeting(props) {
+    return <h1>Please sign up.</h1>;
+}
+
+
+function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+        return <UserGreeting />;
+    }
+    return <GuestGreeting />;
+}
 class Login extends Component {
 
-    constructor(props){
+
+
+
+    constructor(props) {
         super(props);
         this.state = {
-            name: 'Please write an essay about your favorite DOM element.'
+           name: "Max",
+            password: "Max",
+            isLoggedIn: true,
         };
-    }
 
-    state = {
-        redirectToReferrer: false
+      //  this.handleInputChange = this.handleInputChange.bind(this);
     }
 
 
 
     login = () => {
-        fakeAuth.authenticate(() => {
-            this.setState({ redirectToReferrer: true })
-        })
+       console.log(this.state.name);
+       console.log(this.state.password);
+        if(this.state.name==="Max" ){
+            console.log("true");
+
+            this.setState({redirect: true});
+        }
+        else{
+
+        }
     }
 
     render() {
+            if (this.state.redirect) {
+                return <Redirect push to="/datatable" />;
+            }
+
+
         return (
 
             <form >
-  <div className="group">
-      <input type="text" value={this.props.name}  /><span className="highlight"></span><span className="bar"></span>
+
+                <div className="group">
+      <input name="user" type="text"  /><span className="highlight"></span><span className="bar"></span>
           <label>Name</label>
   </div>
         <div className="group">
-            <input type="password"/><span className="highlight"></span><span className="bar"></span>
+            <input name="password" type="password"  /><span className="highlight"></span><span className="bar"></span>
                 <label>Passwort</label>
         </div>
-        <button onClick={this.login} className="button buttonBlue" value="Submit">Login
+        <button onClick={this.login} className="button buttonBlue">Login
             <div className="ripples buttonRipples"><span className="ripplesCircle"></span></div>
         </button>
-
+                <Greeting isLoggedIn={false} />
     </form>
 
 
